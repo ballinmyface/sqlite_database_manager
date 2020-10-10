@@ -1,5 +1,7 @@
+@@ -0,0 +1,59 @@
 from threading import Lock as lock_thread
 from sqlite3 import connect
+from json import loads
 
 
 class database_manager():
@@ -49,3 +51,10 @@ class database_manager():
         if (path != ''):
             self.initialize_thread()
             self.connect_database(path=path)
+
+
+configuration_file = open('configuration.json', 'r').read()
+configuration = loads(str(configuration_file))
+
+database_path = configuration['application_database']
+database = database_manager(path=database_path)
